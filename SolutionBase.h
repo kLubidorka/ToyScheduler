@@ -3,8 +3,9 @@
 
 #include <string>
 
-class SolutionBase{
-    virtual void solve(const std::string &input_filename, const std::string &output_filename) = 0;
+class SolutionBase {
+public:
+    virtual void solve(const std::string &input_filename, const std::string &output_filename);
 };
 
 #endif //TOYSCHEDULER_SOLUTIONBASE_H
