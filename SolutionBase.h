@@ -2,10 +2,18 @@
 #define TOYSCHEDULER_SOLUTIONBASE_H
 
 #include <string>
+#include <iostream>
 
 class SolutionBase {
 public:
-    virtual void solve(const std::string &input_filename, const std::string &output_filename) {};
+    /**
+     * @brief base method that solves the problem
+     * All the solution classes must be subclasses of "SolutionBase" and override "solve" method
+     * @see README.md
+     * @param in -- input stream
+     * @param out -- output stream
+     */
+    virtual void solve(std::istream &in, std::ostream &out) {};
 };
 
 #endif //TOYSCHEDULER_SOLUTIONBASE_H
