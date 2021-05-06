@@ -7,12 +7,18 @@ const std::string test_base_name = "test";
 const std::string solution_base_name = "solution";
 const std::string checker_report_base_name = "report";
 
-void generate_tests_file_io(int test_num, const std::string &output_folder) {
-    TestGenerator generator(5, 5, 10, 10, 5);
+void generate_tests_file_io(int test_num, const std::string &output_folder,
+                            int max_appear_time,
+                            int max_res_per_task,
+                            int system_resources,
+                            int max_priority,
+                            int max_execution_time,
+                            int max_tasks_int_test) {
+    TestGenerator generator(max_appear_time, max_res_per_task, system_resources, max_priority, max_execution_time);
     for (int i = 0; i < test_num; i++) {
         std::string output_file = output_folder + test_base_name + std::to_string(i) + ".txt";
         std::ofstream out(output_file);
-        generator.generateAndPrintTest(3, out);
+        generator.generateAndPrintTest(1 + rand() % max_tasks_int_test, out);
         out.close();
     }
 }
@@ -57,7 +63,7 @@ void check_solutions_in_directory_file_io(int test_num,
 }
 
 int main() {
-    generate_tests_file_io(10, "tests/");
+    generate_tests_file_io(10, "tests/", 10, 10, 20, 20, 10, 10);
     KnapsackSolution solution;
     run_solution_file_io(&solution, 10, "tests/", "solutions/");
     check_solutions_in_directory_file_io(10, "tests/", "solutions/", "reports/");
