@@ -3,5 +3,6 @@ project(ToyScheduler)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(ToyScheduler main.cpp TestGenerator.cpp TestGenerator.h Task.h SolutionBase.h KnapsackSolver.h KnapsackSolution.h ResultChecker.cpp ResultChecker.h)
-
+add_executable(ToyScheduler main.cpp TestGenerator.cpp TestGenerator.h Task.h
+        SolutionBase.h KnapsackSolver.h KnapsackSolution.h GreedySolution.h
+        ResultChecker.h ResultChecker.cpp)
