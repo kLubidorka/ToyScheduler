@@ -15,7 +15,7 @@
 class KnapsackSolution : public SolutionBase {
 
 public:
-    void solve(std::istream& is, std::ostream &os) override {
+    void solve(std::istream &is, std::ostream &os) override {
         std::size_t R, N;
         is >> R >> N;
         std::vector<Task> tasks(N);
@@ -51,12 +51,11 @@ public:
             for (const std::size_t &ind : task_idxes) {
                 const std::size_t i = idxes.size();
                 w[i] = tasks[ind].r;
-                c[i] = (long double)(tasks[ind].p) / (long double)(tasks[ind].d);
+                c[i] = (long double) (tasks[ind].p) / (long double) (tasks[ind].d);
                 idxes.push_back(ind);
             }
             std::vector<std::size_t> res;
             KnapsackSolver::solve(R, w, c, res);
-
             for (const std::size_t &ind : res) {
                 const std::size_t i = idxes[ind];
                 tasks[i].c += 1;
@@ -75,7 +74,7 @@ public:
         for (std::size_t i = 0; i < N; ++i) {
             os << tasks[i].times.size() << " ";
             for (const auto& ind : tasks[i].times) {
-                os << ind.first << " " << ind.second << " ";
+                os << ind.first << " " << ind.second + 1 << " ";
             }
             os << std::endl;
         }
