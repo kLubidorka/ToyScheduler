@@ -79,20 +79,7 @@ public:
         }
     }
 
-    std::string get_name() override { return "Knapsack"; };
-
-private:
-
-    class Task {
-    public:
-        int num;
-        int t;
-        int p;
-        int d;
-        int r;
-        int c;
-        std::vector<std::pair<std::size_t, std::size_t>> times;
-    };
+    std::string get_name() override { return "knapsack"; };
 };
 
 #endif //TOYSCHEDULER_KNAPSACKSOLUTION_H

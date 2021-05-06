@@ -18,7 +18,7 @@ public:
      */
     virtual void solve(std::istream &in, std::ostream &out) {};
 
-    virtual std::string get_name() { return "Base"; };
+    virtual std::string get_name() { return "base"; };
 };
 
 #endif //TOYSCHEDULER_SOLUTIONBASE_H
