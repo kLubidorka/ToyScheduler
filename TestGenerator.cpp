@@ -17,7 +17,7 @@ void TestGenerator::generateAndPrintTest(size_t tasks_num, std::ostream &out) co
     std::vector<Task> tasks;
     generateTasks(&tasks, tasks_num);
     for (auto task : tasks) {
-        out << task.appear_time << "\t" << task.priority << "\t" << task.execution_time << "\t"
+        out << task.appear_time << " " << task.priority << " " << task.execution_time << " "
             << task.required_resources
             << std::endl;
     }
