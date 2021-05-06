@@ -1,9 +1,10 @@
 #include "TestGenerator.h"
 #include "SolutionBase.h"
 #include <fstream>
+#include "KnapsackSolution.h"
 
 void generate_tests_file_io(int test_num, const std::string &output_folder) {
-    TestGenerator generator(10, 10, 100);
+    TestGenerator generator(10, 10, 10);
     for (int i = 0; i < test_num; i++) {
         std::string output_file = output_folder + "test" + std::to_string(i) + ".txt";
         std::ofstream out(output_file);
@@ -27,8 +28,8 @@ void run_solution_file_io(SolutionBase *solution, int test_num,
 }
 
 int main() {
-    int num_test = 10;
-    generate_tests_file_io(num_test, "tests/");
-//    SomeSolution solution;
-//    run_solution(&solution, num_test, "tests/", "output/");
+    generate_tests_file_io(10, "tests/");
+
+    KnapsackSolution solution;
+    run_solution_file_io(&solution, 10, "tests/", "output/");
 }

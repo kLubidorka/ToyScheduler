@@ -2,6 +2,7 @@
 #define TOYSCHEDULER_TESTGENERATOR_H
 
 #include <vector>
+#include <string>
 #include "Task.h"
 
 class TestGenerator {
