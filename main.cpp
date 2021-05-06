@@ -70,6 +70,12 @@ void check_solutions_in_directory_file_io(int test_num,
     std::cout << "SUCCESS" << std::endl;
 }
 
+//void compare_reports(int test_num, std::vector<std::string> report_directories){
+//    for (int i =0; i < test_num; i++){
+//        std::string input_file = input_folder + test_base_name + std::to_string(i) + ".txt";
+//    }
+//}
+
 int main() {
     generate_tests_file_io(100, "tests/", 10, 50, 150, 20, 40, 100);
     KnapsackSolution solution;

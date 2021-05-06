@@ -14,6 +14,8 @@ public:
      * @param out -- output stream
      */
     virtual void solve(std::istream &in, std::ostream &out) {};
+
+    virtual std::string get_name() { return "Base"; };
 };
 
 #endif //TOYSCHEDULER_SOLUTIONBASE_H

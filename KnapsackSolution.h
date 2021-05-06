@@ -80,6 +80,8 @@ public:
         }
     }
 
+    std::string get_name() override { return "Knapsack"; };
+
 private:
 
     class Task {
