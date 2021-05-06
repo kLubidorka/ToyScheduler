@@ -20,17 +20,16 @@ public:
         std::vector<Task> tasks(N);
         std::set<std::size_t> time_snapshots;
         for (std::size_t i = 0; i < N; ++i) {
-            tasks[i].num = i;
-            is >> tasks[i].t >> tasks[i].p >> tasks[i].d >> tasks[i].r;
-            tasks[i].c = 0;
-            time_snapshots.insert(tasks[i].t);
+            is >> tasks[i].appear_time >> tasks[i].priority;
+            is >> tasks[i].execution_time >> tasks[i].required_resources;
+            time_snapshots.insert(tasks[i].appear_time);
         }
 
         auto cmp = [&tasks](const std::size_t& a, const std::size_t& b) {
-            if (tasks[a].p * tasks[b].d > tasks[a].d * tasks[b].p) {
+            if (tasks[a].priority * tasks[b].execution_time > tasks[a].execution_time * tasks[b].priority) {
                 return true;
             }
-            if (tasks[a].p * tasks[b].d < tasks[a].d * tasks[b].p) {
+            if (tasks[a].priority * tasks[b].execution_time < tasks[a].execution_time * tasks[b].priority) {
                 return false;
             }
             return a < b;
@@ -45,13 +44,13 @@ public:
 
             // process working tasks
             for (const auto &task_id : working_tasks) {
-                tasks[task_id].c += (int) (next_T - T);
-                if (!tasks[task_id].times.empty() && tasks[task_id].times.back().second == T) {
-                    tasks[task_id].times.back().second = next_T;
+                tasks[task_id].call_count += (int) (next_T - T);
+                if (!tasks[task_id].exec_ranges.empty() && tasks[task_id].exec_ranges.back().second == T) {
+                    tasks[task_id].exec_ranges.back().second = next_T;
                 } else {
-                    tasks[task_id].times.emplace_back(T, next_T);
+                    tasks[task_id].exec_ranges.emplace_back(T, next_T);
                 }
-                if (tasks[task_id].d == tasks[task_id].c) {
+                if (tasks[task_id].execution_time == tasks[task_id].call_count) {
                     pull_tasks.erase(task_id);
                 }
             }
@@ -59,7 +58,7 @@ public:
             T = next_T;
 
             // add new tasks from input in queue
-            while (idx < N && tasks[idx].t <= T) {
+            while (idx < N && tasks[idx].appear_time <= T) {
                 pull_tasks.insert(idx);
                 ++idx;
             }
@@ -68,17 +67,17 @@ public:
             std::size_t curr_R = 0;
             for (const auto & task_id : pull_tasks) {
                 auto & task = tasks[task_id];
-                if (curr_R + task.r <= R) {
-                    curr_R += task.r;
+                if (curr_R + task.required_resources <= R) {
+                    curr_R += task.required_resources;
                     working_tasks.push_back(task_id);
-                    time_snapshots.insert(T + task.d - task.c);
+                    time_snapshots.insert(T + task.execution_time - task.call_count);
                 }
             }
         }
 
         for (std::size_t i = 0; i < N; ++i) {
-            os << tasks[i].times.size() << " ";
-            for (const auto &ind : tasks[i].times) {
+            os << tasks[i].exec_ranges.size() << " ";
+            for (const auto &ind : tasks[i].exec_ranges) {
                 os << ind.first << " " << ind.second << " ";
             }
             os << std::endl;
