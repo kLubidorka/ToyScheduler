@@ -79,20 +79,6 @@ public:
             os << std::endl;
         }
     }
-
-private:
-
-    class Task {
-    public:
-        int num;
-        int t;
-        int p;
-        int d;
-        int r;
-        int c;
-        std::vector<std::pair<std::size_t, std::size_t>> times;
-    };
-
 };
 
 #endif //TOYSCHEDULER_KNAPSACKSOLUTION_H
