@@ -1,6 +1,10 @@
 #ifndef TOYSCHEDULER_TASK_H
 #define TOYSCHEDULER_TASK_H
 
+/**
+ * @brief task for scheduler
+ * @see README.md
+ */
 struct Task {
     size_t appear_time;
     size_t priority;

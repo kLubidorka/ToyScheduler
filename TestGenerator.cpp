@@ -1,15 +1,13 @@
 #include "TestGenerator.h"
 
-#include <fstream>
+#include <iostream>
 
 TestGenerator::TestGenerator(size_t max_appear_time, size_t max_res_per_task, size_t system_resources) :
         max_appear_time(max_appear_time),
         max_res_per_task(max_res_per_task),
         system_resources(system_resources) {}
 
-void TestGenerator::generateAndPrintTest(size_t tasks_num, const std::string &filename) const {
-    std::ofstream out;
-    out.open(filename);
+void TestGenerator::generateAndPrintTest(size_t tasks_num, std::ostream &out) const {
     out << system_resources << std::endl;
     out << tasks_num << std::endl;
     std::vector<Task> tasks;
@@ -19,7 +17,6 @@ void TestGenerator::generateAndPrintTest(size_t tasks_num, const std::string &fi
             << task.required_resources
             << std::endl;
     }
-    out.close();
 }
 
 void TestGenerator::generateTasks(std::vector<Task> *tasks, size_t tasks_num) const {
