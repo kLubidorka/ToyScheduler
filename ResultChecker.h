@@ -10,14 +10,14 @@
 
 class ResultChecker {
 public:
-    void check(std::istream &test_input, std::istream &solution_input, std::ostream &report_output);
+    bool check(std::istream &test_input, std::istream &solution_input, std::ostream &report_output);
 
 private:
     void read_test(std::istream &in);
 
-    void read_solution(std::istream &in, std::ostream &out);
+    bool read_solution(std::istream &in, std::ostream &out);
 
-    void check_solution(std::ostream &out);
+    bool check_solution(std::ostream &out);
 
 private:
     std::vector<Task> tasks;
