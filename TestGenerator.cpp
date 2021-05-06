@@ -1,6 +1,7 @@
 #include "TestGenerator.h"
 
 #include <iostream>
+#include <algorithm>
 
 TestGenerator::TestGenerator(size_t max_appear_time, size_t max_res_per_task, size_t system_resources) :
         max_appear_time(max_appear_time),

@@ -33,3 +33,6 @@
 .idea/
 cmake-build-debug/
 .DS_Store
+
+input
+output

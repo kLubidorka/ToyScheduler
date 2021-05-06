@@ -10,7 +10,7 @@ void ResultChecker::check(std::istream &test_input, std::istream &solution_input
 void ResultChecker::read_test(std::istream &in) {
     in >> system_resources;
     in >> total_tasks;
-    tasks.resize(total_tasks);
+    tasks.reserve(total_tasks);
     size_t t, p, d, r;
     for (int i = 0; i < total_tasks; ++i) {
         in >> t >> p >> d >> r;
