@@ -8,6 +8,7 @@ class SolutionBase {
 public:
     /**
      * @brief base method that solves the problem
+     * All the solution classes must be subclasses of "SolutionBase" and override "solve" method
      * @see README.md
      * @param in -- input stream
      * @param out -- output stream
