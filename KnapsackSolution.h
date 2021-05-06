@@ -72,12 +72,14 @@ public:
 
         for (std::size_t i = 0; i < N; ++i) {
             os << tasks[i].exec_ranges.size() << " ";
-            for (const auto& ind : tasks[i].exec_ranges) {
+            for (const auto &ind : tasks[i].exec_ranges) {
                 os << ind.first << " " << ind.second << " ";
             }
             os << std::endl;
         }
     }
+
+    std::string get_name() override { return "knapsack"; };
 };
 
 #endif //TOYSCHEDULER_KNAPSACKSOLUTION_H

@@ -4,6 +4,8 @@
 #include "KnapsackSolution.h"
 #include "GreedySolution.h"
 
+#include <ctime>
+
 const std::string test_base_name = "test";
 const std::string solution_base_name = "solution";
 const std::string checker_report_base_name = "report";
@@ -68,19 +70,69 @@ void check_solutions_in_directory_file_io(int test_num,
         }
 
     }
-    std::cout << "SUCCESS" << std::endl;
+}
+
+void run_solutions(int test_num, const std::vector<SolutionBase *> &solutions) {
+    for (auto solution : solutions) {
+        std::clock_t c_start = std::clock();
+        run_solution_file_io(solution, test_num, "tests/", solution->get_name() + "Solutions/");
+        std::clock_t c_end = std::clock();
+        u_long time_elapsed_ms = 1000 * (c_end-c_start) / CLOCKS_PER_SEC;
+        std::cout << "CPU time used by " << solution->get_name() <<" on " << test_num << " tests: " << time_elapsed_ms << " ms\n";
+
+        check_solutions_in_directory_file_io(test_num, "tests/", solution->get_name() + "Solutions/",
+                                             solution->get_name() + "Reports/");
+    }
+}
+
+void compare_reports(int test_num, const std::vector<SolutionBase *> &solutions) {
+    std::vector<std::vector<std::pair<double, double>>> results;
+    results.resize(test_num);
+    for (int i = 0; i < test_num; i++) {
+        results[i].reserve(solutions.size());
+        for (auto solution : solutions) {
+            std::string input_file =
+                    solution->get_name() + "Reports/" + checker_report_base_name + std::to_string(i) + ".txt";
+            std::ifstream in(input_file);
+            std::string trash;
+            double avg_load, score;
+            in >> trash >> trash >> avg_load >> trash >> trash >> score;
+            results[i].emplace_back(avg_load, score);
+            in.close();
+        }
+    }
+    for (auto &elem : results) {
+        double first_solution_avg_load = elem[0].first;
+        double first_solution_score = elem[0].second;
+        for (auto &elem2 : elem) {
+            elem2.first = (elem2.first - first_solution_avg_load) / first_solution_avg_load * 100;
+            elem2.second = (elem2.second - first_solution_score) / first_solution_score * 100;
+        }
+    }
+    std::vector<std::pair<double, double>> final_results(solutions.size());
+    for (auto &elem : results) {
+        for (int i = 0; i < elem.size(); i++) {
+            final_results[i].first += elem[i].first / test_num;
+            final_results[i].second += elem[i].second / test_num;
+        }
+    }
+    std::string first_solution_name = solutions[0]->get_name();
+    for (int i = 1; i < solutions.size(); i++) {
+        std::cout << solutions[i]->get_name() << " has average load " <<std::fixed << std::setprecision(2) << final_results[i].first << "% greater than "
+                  << first_solution_name << " on average" << std::endl;
+        std::cout << solutions[i]->get_name() << " has total score " << final_results[i].second << "% greater than "
+                  << first_solution_name << " on average" << std::endl << std::endl;
+    }
 }
 
 int main() {
-    generate_tests_file_io(100, "tests/", 10, 50, 150, 20, 40, 100);
+    int test_num = 1000;
+    generate_tests_file_io(test_num, "tests/", 100, 50, 150, 20, 40, 100);
 
-    // knapsack solution
     KnapsackSolution knapsackSolution;
-    run_solution_file_io(&knapsackSolution, 100, "tests/", "knapsackSolutions/");
-    check_solutions_in_directory_file_io(100, "tests/", "knapsackSolutions/", "knapsackReports/");
-
-    // greedy solution
     GreedySolution greedySolution;
-    run_solution_file_io(&greedySolution, 100, "tests/", "greedySolutions/");
-    check_solutions_in_directory_file_io(100, "tests/", "greedySolutions/", "greedyReports/");
+    std::vector<SolutionBase *> solutions = {&knapsackSolution, &greedySolution};
+
+    run_solutions(test_num, solutions);
+    compare_reports(test_num, solutions);
 }

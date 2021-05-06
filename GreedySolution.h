@@ -25,7 +25,7 @@ public:
             time_snapshots.insert(tasks[i].appear_time);
         }
 
-        auto cmp = [&tasks](const std::size_t& a, const std::size_t& b) {
+        auto cmp = [&tasks](const std::size_t &a, const std::size_t &b) {
             if (tasks[a].priority * tasks[b].execution_time > tasks[a].execution_time * tasks[b].priority) {
                 return true;
             }
@@ -65,8 +65,8 @@ public:
 
             // choose new working tasks
             std::size_t curr_R = 0;
-            for (const auto & task_id : pull_tasks) {
-                auto & task = tasks[task_id];
+            for (const auto &task_id : pull_tasks) {
+                auto &task = tasks[task_id];
                 if (curr_R + task.required_resources <= R) {
                     curr_R += task.required_resources;
                     working_tasks.push_back(task_id);
@@ -84,6 +84,7 @@ public:
         }
     }
 
+    std::string get_name() override { return "greedy"; };
 };
 
 #endif //TOYSCHEDULER_GREEDYSOLUTION_H
