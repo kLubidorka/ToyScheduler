@@ -16,7 +16,7 @@ public:
      *      1 <= required_resources <= max_res_per_task
      * @param system_resources -- total resources available to scheduler
      */
-    TestGenerator(size_t max_appear_time, size_t max_res_per_task, size_t system_resources);
+    TestGenerator(size_t max_appear_time, size_t max_res_per_task, size_t system_resources, size_t max_priority, size_t max_execution_time);
 
     /**
      * @brief generate test with specified amount of tasks
@@ -32,9 +32,8 @@ private:
     size_t max_appear_time;
     size_t max_res_per_task;
     size_t system_resources;
-private:
-    static const size_t MAX_PRIORITY = 20;
-    static const size_t MAX_EXEC_TIME = 50;
+    size_t max_priority;
+    size_t max_execution_time;
 };
 
 

@@ -5,14 +5,14 @@
 
 const std::string test_base_name = "test";
 const std::string solution_base_name = "solution";
-const std::string checker_report_base_name = "solution";
+const std::string checker_report_base_name = "report";
 
 void generate_tests_file_io(int test_num, const std::string &output_folder) {
-    TestGenerator generator(10, 10, 10);
+    TestGenerator generator(5, 5, 10, 10, 5);
     for (int i = 0; i < test_num; i++) {
         std::string output_file = output_folder + test_base_name + std::to_string(i) + ".txt";
         std::ofstream out(output_file);
-        generator.generateAndPrintTest(10, out);
+        generator.generateAndPrintTest(3, out);
         out.close();
     }
 }

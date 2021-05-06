@@ -75,7 +75,7 @@ public:
         for (std::size_t i = 0; i < N; ++i) {
             os << tasks[i].times.size() << " ";
             for (const auto& ind : tasks[i].times) {
-                os << ind.first << " " << ind.second << " ";
+                os << ind.first << " " << ind.second + 1 << " ";
             }
             os << std::endl;
         }
