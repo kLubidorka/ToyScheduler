@@ -2,7 +2,10 @@
 #define TOYSCHEDULER_SOLUTIONBASE_H
 
 #include <string>
+#include <algorithm>
 #include <iostream>
+#include <vector>
+#include "Task.h"
 
 class SolutionBase {
 public:

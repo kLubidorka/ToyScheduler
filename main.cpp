@@ -2,6 +2,7 @@
 #include "SolutionBase.h"
 #include "ResultChecker.h"
 #include "KnapsackSolution.h"
+#include "GreedySolution.h"
 
 const std::string test_base_name = "test";
 const std::string solution_base_name = "solution";
@@ -78,7 +79,14 @@ void check_solutions_in_directory_file_io(int test_num,
 
 int main() {
     generate_tests_file_io(100, "tests/", 10, 50, 150, 20, 40, 100);
-    KnapsackSolution solution;
-    run_solution_file_io(&solution, 100, "tests/", "solutions/");
-    check_solutions_in_directory_file_io(100, "tests/", "solutions/", "reports/");
+
+    // knapsack solution
+    KnapsackSolution knapsackSolution;
+    run_solution_file_io(&knapsackSolution, 100, "tests/", "knapsackSolutions/");
+    check_solutions_in_directory_file_io(100, "tests/", "knapsackSolutions/", "knapsackReports/");
+
+    // greedy solution
+    GreedySolution greedySolution;
+    run_solution_file_io(&greedySolution, 100, "tests/", "greedySolutions/");
+    check_solutions_in_directory_file_io(100, "tests/", "greedySolutions/", "greedyReports/");
 }
