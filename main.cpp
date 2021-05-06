@@ -126,8 +126,8 @@ void compare_reports(int test_num, const std::vector<SolutionBase *> &solutions)
 }
 
 int main() {
-    int test_num = 100;
-    generate_tests_file_io(test_num, "tests/", 10, 50, 150, 20, 40, 100);
+    int test_num = 1000;
+    generate_tests_file_io(test_num, "tests/", 100, 50, 150, 20, 40, 100);
 
     KnapsackSolution knapsackSolution;
     GreedySolution greedySolution;
