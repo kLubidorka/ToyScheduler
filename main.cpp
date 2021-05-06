@@ -71,8 +71,8 @@ void check_solutions_in_directory_file_io(int test_num,
 }
 
 int main() {
-    generate_tests_file_io(10, "tests/", 10, 10, 20, 20, 10, 10);
+    generate_tests_file_io(100, "tests/", 10, 50, 150, 20, 40, 100);
     KnapsackSolution solution;
-    run_solution_file_io(&solution, 10, "tests/", "solutions/");
-    check_solutions_in_directory_file_io(10, "tests/", "solutions/", "reports/");
+    run_solution_file_io(&solution, 100, "tests/", "solutions/");
+    check_solutions_in_directory_file_io(100, "tests/", "solutions/", "reports/");
 }

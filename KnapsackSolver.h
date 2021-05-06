@@ -36,7 +36,7 @@ public:
         }
 
         // dp steps
-        for (size_t i = 1; i < n; ++i) {
+        for (std::size_t i = 1; i < n; ++i) {
             dp[i] = dp[i - 1];
             for (WeightType weight = w[i]; weight <= W; ++weight) {
                 dp[i][weight] = std::max(dp[i][weight], dp[i - 1][weight - w[i]] + c[i]);
@@ -52,7 +52,7 @@ public:
                 res.push_back(i);
             }
         }
-        if (weight != 0) {
+        if (dp[0][weight] != 0) {
             res.push_back(0);
         }
         std::reverse(res.begin(), res.end());
