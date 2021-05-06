@@ -6,6 +6,12 @@
 
 class SolutionBase {
 public:
+    /**
+     * @brief base method that solves the problem
+     * @see README.md
+     * @param in -- input stream
+     * @param out -- output stream
+     */
     virtual void solve(std::istream &in, std::ostream &out) {};
 };
 
