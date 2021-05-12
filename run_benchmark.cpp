@@ -1,8 +1,8 @@
-#include "TestGenerator.h"
-#include "SolutionBase.h"
-#include "ResultChecker.h"
-#include "KnapsackSolution.h"
-#include "GreedySolution.h"
+#include "test/TestGenerator.h"
+#include "src/SolutionBase.h"
+#include "test/ResultChecker.h"
+#include "src/KnapsackSolution.h"
+#include "src/GreedySolution.h"
 
 #include <ctime>
 
@@ -77,12 +77,21 @@ void run_solutions(int test_num, const std::vector<SolutionBase *> &solutions) {
         std::clock_t c_start = std::clock();
         run_solution_file_io(solution, test_num, "tests/", solution->get_name() + "Solutions/");
         std::clock_t c_end = std::clock();
-        u_long time_elapsed_ms = 1000 * (c_end-c_start) / CLOCKS_PER_SEC;
-        std::cout << "CPU time used by " << solution->get_name() <<" on " << test_num << " tests: " << time_elapsed_ms << " ms\n";
+        u_long time_elapsed_ms = 1000 * (c_end - c_start) / CLOCKS_PER_SEC;
+        std::cout << "CPU time used by " << solution->get_name() << " on " << test_num << " tests: " << time_elapsed_ms
+                  << " ms\n";
 
         check_solutions_in_directory_file_io(test_num, "tests/", solution->get_name() + "Solutions/",
                                              solution->get_name() + "Reports/");
     }
+}
+
+std::string lower_or_greater(double value){
+    return value >= 0 ? "greater" : "lower";
+}
+
+std::string better_or_worse(double value){
+    return value >= 0 ? "worse" : "better";
 }
 
 void compare_reports(int test_num, const std::vector<SolutionBase *> &solutions) {
@@ -118,15 +127,16 @@ void compare_reports(int test_num, const std::vector<SolutionBase *> &solutions)
     }
     std::string first_solution_name = solutions[0]->get_name();
     for (int i = 1; i < solutions.size(); i++) {
-        std::cout << solutions[i]->get_name() << " has average load " <<std::fixed << std::setprecision(2) << final_results[i].first << "% greater than "
+        std::cout << solutions[i]->get_name() << " has average load " << std::fixed << std::setprecision(2)
+                  << abs(final_results[i].first) << "% " << lower_or_greater(final_results[i].first) << " than "
                   << first_solution_name << " on average" << std::endl;
-        std::cout << solutions[i]->get_name() << " has total score " << final_results[i].second << "% greater than "
+        std::cout << solutions[i]->get_name() << " has total score " << abs(final_results[i].second) << "% "<< better_or_worse(final_results[i].second) <<" than "
                   << first_solution_name << " on average" << std::endl << std::endl;
     }
 }
 
 int main() {
-    int test_num = 1000;
+    int test_num = 10;
     generate_tests_file_io(test_num, "tests/", 100, 50, 150, 20, 40, 100);
 
     KnapsackSolution knapsackSolution;

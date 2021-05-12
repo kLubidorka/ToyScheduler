@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <string>
-#include "Task.h"
+#include "../src/Task.h"
 
 class TestGenerator {
 public:
