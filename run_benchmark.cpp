@@ -86,11 +86,11 @@ void run_solutions(int test_num, const std::vector<SolutionBase *> &solutions) {
     }
 }
 
-std::string lower_or_greater(double value){
+std::string lower_or_greater(double value) {
     return value >= 0 ? "greater" : "lower";
 }
 
-std::string better_or_worse(double value){
+std::string better_or_worse(double value) {
     return value >= 0 ? "worse" : "better";
 }
 
@@ -130,13 +130,18 @@ void compare_reports(int test_num, const std::vector<SolutionBase *> &solutions)
         std::cout << solutions[i]->get_name() << " has average load " << std::fixed << std::setprecision(2)
                   << abs(final_results[i].first) << "% " << lower_or_greater(final_results[i].first) << " than "
                   << first_solution_name << " on average" << std::endl;
-        std::cout << solutions[i]->get_name() << " has total score " << abs(final_results[i].second) << "% "<< better_or_worse(final_results[i].second) <<" than "
+        std::cout << solutions[i]->get_name() << " has total score " << abs(final_results[i].second) << "% "
+                  << better_or_worse(final_results[i].second) << " than "
                   << first_solution_name << " on average" << std::endl << std::endl;
     }
 }
 
-int main() {
-    int test_num = 10;
+int main(int argc, char* argv[]) {
+    int test_num = 1000;
+    if (argc > 1){
+        test_num = atoi(argv[1]);
+    }
+
     generate_tests_file_io(test_num, "tests/", 100, 50, 150, 20, 40, 100);
 
     KnapsackSolution knapsackSolution;

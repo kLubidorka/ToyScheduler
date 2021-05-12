@@ -16,5 +16,12 @@ done
 mkdir "tests"
 cmake ..
 make
-./toyScheduler
+
+if [ -n "$1" ]; then
+  echo "Started benchmark on ${1} tests"
+  ./toyScheduler "${1}"
+else
+  echo "Started benchmark on 500 tests"
+  ./toyScheduler 500
+fi
 )
