@@ -5,6 +5,7 @@
 #include "src/GreedySolution.h"
 
 #include <ctime>
+#include <iomanip>
 
 const std::string test_base_name = "test";
 const std::string solution_base_name = "solution";
@@ -77,7 +78,7 @@ void run_solutions(int test_num, const std::vector<SolutionBase *> &solutions) {
         std::clock_t c_start = std::clock();
         run_solution_file_io(solution, test_num, "tests/", solution->get_name() + "Solutions/");
         std::clock_t c_end = std::clock();
-        u_long time_elapsed_ms = 1000 * (c_end - c_start) / CLOCKS_PER_SEC;
+        std::clock_t time_elapsed_ms = 1000 * (c_end - c_start) / CLOCKS_PER_SEC;
         std::cout << "CPU time used by " << solution->get_name() << " on " << test_num << " tests: " << time_elapsed_ms
                   << " ms\n";
 
