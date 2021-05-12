@@ -47,3 +47,13 @@
 1 8 16 
 ```
 # Описание решения
+
+В проекте есть 2 решения задачи: методом динамического программирования и жадными алгоритмами. Для начала разберем общую часть решения. Пусть в текущий момент времени есть какой-то набор задач J, состоящий из <img src="https://render.githubusercontent.com/render/math?math=(t_j, p_j, d_j, r_j)">, 1 <= j <= |J|, также заметим, что если мы не возьмем на исполнение задачу номер j, то loss увеличится на <img src="https://render.githubusercontent.com/render/math?math=\frac{p_{j}}{d_{j}}">. В таком случае нам нужно выбрать <img src="https://render.githubusercontent.com/render/math?math=x_j \in {0, 1}"> так, чтобы <img src="https://render.githubusercontent.com/render/math?math=\sum_{j}x_j r_j \leq R">, и  при этом  <img src="https://render.githubusercontent.com/render/math?math=\sum_{j}(1 - x_j) \frac{p_{j}}{d_{j}} \rightarrow min">
+
+1) Метод динамического программирования
+
+Это классическая задача о рюкзаке, где вес предмета - <img src="https://render.githubusercontent.com/render/math?math=r_j">, а его стоимость - <img src="https://render.githubusercontent.com/render/math?math=\frac{p_{j}}{d_{j}}">. Таким образом можно выбирать исполняемые задачи на 1 такт времени. После чего добавлять новопришедшие задачи и удалять законченные. Асимптотика - O(T * N * R), где T - суммарное время работы
+
+2) Жадный алгоритм
+
+В каждый момент времени будем сортировать все незаконченные работы по <img src="https://render.githubusercontent.com/render/math?math=\frac{p_{j}}{d_{j}}">, после чего жадно их класть на исполнение. Тут же можно заметить, что мы можем проскакивать время не по одному такту, а только те моменты, где заканчивается / добавляется новая задача. Асимптотика - O(N^2)
