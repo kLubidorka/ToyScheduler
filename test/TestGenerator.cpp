@@ -3,6 +3,10 @@
 #include <iostream>
 #include <algorithm>
 
+/**
+ * Оригинальный код взят отсюда https://github.com/demist/schedule_checker
+ */
+
 TestGenerator::TestGenerator(size_t max_appear_time, size_t max_res_per_task, size_t system_resources,
                              size_t max_priority, size_t max_execution_time) :
         max_appear_time(max_appear_time),

@@ -1,5 +1,8 @@
 #include "ResultChecker.h"
 
+/**
+ * Оригинальный код взят отсюда https://github.com/demist/schedule_checker
+ */
 
 bool ResultChecker::check(std::istream &test_input, std::istream &solution_input, std::ostream &report_output) {
     bool no_mistakes = true;
