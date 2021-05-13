@@ -10,7 +10,7 @@ set(TEST_LIB test/TestGenerator.cpp test/TestGenerator.h test/ResultChecker.h te
 add_library(test STATIC ${TEST_LIB})
 set_target_properties(test PROPERTIES LINKER_LANGUAGE CXX)
 
-add_executable(toyScheduler run_benchmark.cpp)
+add_executable(toyScheduler main.cpp)
 
 target_link_libraries(toyScheduler scheduler)
 target_link_libraries(toyScheduler test)
